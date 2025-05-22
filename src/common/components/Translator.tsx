@@ -1888,7 +1888,6 @@ function InnerTranslator(props: IInnerTranslatorProps) {
                                             </div>
                                         )}
                                         <Textarea
-                                            readOnly
                                             inputRef={editorRef}
                                             autoFocus={autoFocus}
                                             overrides={{
@@ -1944,19 +1943,19 @@ function InnerTranslator(props: IInnerTranslatorProps) {
                                                     ? props.editorRows
                                                     : Math.min(Math.max(editableText.split('\n').length, 3), 12)
                                             }
-                                            // onChange={(e) => setEditableText(e.target.value)}
-                                            // onKeyDown={(e) => {
-                                            //     e.stopPropagation()
-                                            // }}
-                                            // onKeyUp={(e) => {
-                                            //     e.stopPropagation()
-                                            // }}
-                                            // onKeyPress={(e) => {
-                                            //     e.stopPropagation()
-                                            //     if (e.key === 'Enter' && !e.shiftKey) {
-                                            //         handleSubmit(e)
-                                            //     }
-                                            // }}
+                                            onChange={(e) => setEditableText(e.target.value)}
+                                            onKeyDown={(e) => {
+                                                e.stopPropagation()
+                                            }}
+                                            onKeyUp={(e) => {
+                                                e.stopPropagation()
+                                            }}
+                                            onKeyPress={(e) => {
+                                                e.stopPropagation()
+                                                if (e.key === 'Enter' && !e.shiftKey) {
+                                                    handleSubmit(e)
+                                                }
+                                            }}
                                         />
                                         <div
                                             style={{
