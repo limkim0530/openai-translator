@@ -93,14 +93,20 @@ export abstract class AbstractOpenAI extends AbstractEngine {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async getBaseRequestBody(): Promise<Record<string, any>> {
         const model = await this.getAPIModel()
-        return {
+        const body = {
             model,
             temperature: 0,
             top_p: 1,
-            // frequency_penalty: 1,
-            // presence_penalty: 1,
             stream: true,
         }
+        if (!model.includes('grok-mini-3')) {
+            return {
+                ...body,
+                frequency_penalty: 1,
+                presence_penalty: 1,
+            }
+        }
+        return body
     }
 
     async sendMessage(req: IMessageRequest): Promise<void> {
