@@ -28,7 +28,7 @@ import AppConfig from '../../../package.json'
 import { useSettings } from '../hooks/useSettings'
 import { defaultTTSProvider, langCode2TTSLang, ttsLangTestTextMap } from '../tts'
 import { RiDeleteBin5Line } from 'react-icons/ri'
-import { IoIosHelpCircleOutline, IoIosSave, IoMdAdd } from 'react-icons/io'
+import { IoIosSave, IoMdAdd } from 'react-icons/io'
 import { TTSProvider } from '../tts/types'
 import { fetchEdgeVoices } from '../tts/edge-tts'
 import { useThemeType } from '../hooks/useThemeType'
@@ -2531,7 +2531,7 @@ export function InnerSettings({
                                                 'to get your API Key. You can separate multiple API Keys with English commas to achieve quota doubling and load balancing.'
                                             )}
                                         </div>
-                                        {openaiAPIKeyPromotion && (
+                                        {/* {openaiAPIKeyPromotion && (
                                             <div className={styles.promotion}>
                                                 <div
                                                     onClick={(e) => {
@@ -2568,7 +2568,7 @@ export function InnerSettings({
                                                     </div>
                                                 )}
                                             </div>
-                                        )}
+                                        )} */}
                                     </div>
                                 }
                             >
