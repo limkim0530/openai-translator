@@ -77,7 +77,7 @@ jobs:
       - name: build tauri renderer
         run: pnpm build-tauri-renderer
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v3.2.1
         with:
           name: tauri-renderer
           path: dist/tauri/
@@ -148,7 +148,7 @@ jobs:
           VERSION: "${{ steps.get_version.outputs.version-without-v }}"
         run: make change-version change-package-version
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v3.2.1
         with:
           name: tauri-renderer
           path: dist/tauri
