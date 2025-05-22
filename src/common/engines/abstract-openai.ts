@@ -99,7 +99,7 @@ export abstract class AbstractOpenAI extends AbstractEngine {
             top_p: 1,
             stream: true,
         }
-        if (!model.includes('grok-mini-3')) {
+        if (!model.includes('grok-3-mini')) {
             return {
                 ...body,
                 frequency_penalty: 1,
