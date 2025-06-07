@@ -69,7 +69,7 @@ export class Gemini extends AbstractEngine {
         const model = await this.getModel()
         const url =
             urlJoin(geminiAPIURL, '/v1beta/models/', `${model}:streamGenerateContent`) +
-            qs.stringify({ key: apiKey }, { addQueryPrefix: true })
+            qs.stringify({ key: apiKey, alt: 'sse' }, { addQueryPrefix: true })
         const headers = {
             'Content-Type': 'application/json',
             'User-Agent':
@@ -86,6 +86,11 @@ export class Gemini extends AbstractEngine {
                     ],
                 },
             ],
+            generationConfig: {
+                thinkingConfig: {
+                    thinkingBudget: 0,
+                },
+            },
             safetySettings: SAFETY_SETTINGS,
         }
 
@@ -96,7 +101,7 @@ export class Gemini extends AbstractEngine {
             headers,
             body: JSON.stringify(body),
             signal: req.signal,
-            usePartialArrayJSONParser: true,
+            usePartialArrayJSONParser: false,
             onMessage: async (msg) => {
                 if (finished) return
                 let resp
@@ -114,7 +119,7 @@ export class Gemini extends AbstractEngine {
                     req.onError('no candidates')
                     return
                 }
-                if (resp.candidates[0].finishReason !== 'STOP') {
+                if (resp.candidates[0].finishReason && resp.candidates[0].finishReason !== 'STOP') {
                     finished = true
                     req.onFinished(resp.candidates[0].finishReason)
                     return
